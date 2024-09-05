@@ -7,6 +7,11 @@ public class enemyDamage : MonoBehaviour
     // Start is called before the first frame update
        public int health = 1;
        public GameObject explosionPrefab;
+       public CameraShake cameraShake;
+       void Start()
+       {
+        cameraShake = Camera.main.GetComponent<CameraShake>();
+       }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("PlayerBullet"))
@@ -33,6 +38,10 @@ public class enemyDamage : MonoBehaviour
      {
         Destroy(gameObject);
         Explode();
+        if (cameraShake!=null)
+        {
+            cameraShake.Shake();
+        }
      }
       void Explode()
       {
